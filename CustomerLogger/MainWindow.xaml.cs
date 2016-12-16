@@ -456,34 +456,42 @@ namespace CustomerLogger
             String URLString = "https://cougtech.wsu.edu/SOAP/Look.aspx?IDn=" + id;
             XmlTextReader reader = new XmlTextReader(URLString);
 
-            while (reader.Read())
+            try
             {
-                switch (reader.NodeType)
+                while (reader.Read())
                 {
-                    case XmlNodeType.Element: // The node is an element.
-                        Console.Write("<" + reader.Name);
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element: // The node is an element.
+                            Console.Write("<" + reader.Name);
 
-                        while (reader.MoveToNextAttribute()) // Read the attributes.
-                            Console.Write(" " + reader.Name + "='" + reader.Value + "'");
-                        Console.Write(">");
-                        Console.WriteLine(">");
-                        break;
-                    case XmlNodeType.Text: //Display the text in each element.
-                        String tempString = reader.Value;
-                        Console.WriteLine(tempString);
-                        if (tempString.Contains("@")) {
-                            return tempString;
-                        }
-                        break;
-                    case XmlNodeType.EndElement: //Display the end of the element.
-                        Console.Write("</" + reader.Name);
-                        Console.WriteLine(">");
-                        break;
+                            while (reader.MoveToNextAttribute()) // Read the attributes.
+                                Console.Write(" " + reader.Name + "='" + reader.Value + "'");
+                            Console.Write(">");
+                            Console.WriteLine(">");
+                            break;
+                        case XmlNodeType.Text: //Display the text in each element.
+                            String tempString = reader.Value;
+                            Console.WriteLine(tempString);
+                            if (tempString.Contains("@"))
+                            {
+                                return tempString;
+                            }
+                            break;
+                        case XmlNodeType.EndElement: //Display the end of the element.
+                            Console.Write("</" + reader.Name);
+                            Console.WriteLine(">");
+                            break;
+                    }
                 }
+            }
+            catch(Exception e)
+            {
+                Console.Write(e.ToString());
             }
 
 
-            return "cougtech@wsu.edu";
+            return "bcougar@wsu.edu";
 
 
         }
@@ -518,11 +526,27 @@ namespace CustomerLogger
             // If the ticket is an appointment then changes the subject
             if (StudentIDPage.isTest)
             {
-                msg.Subject = "##CTtest : " + prob + " : " + id;
+                msg.Subject = "##CTtest : " + prob + " : " + id + " : Butch-Test";
             }
             else if (StudentIDPage.IsQuickPick)
             {
-                msg.Subject = "##CTwi : " + id;
+                msg.Subject = "##CTwi : ";
+                if(id.ToLower().Equals("gi"))
+                {
+                    msg.Subject += "GI : Butch";
+                }
+                else if (id.ToLower().Equals("wc"))
+                {
+                    msg.Subject += "WC : Butch";
+                }
+                else if (id.ToLower().Equals("rf"))
+                {
+                    msg.Subject += "RF : Butch";
+                }
+                else if (id.ToLower().Equals("ct"))
+                {
+                    msg.Subject += "CT : Butch";
+                }
             }
             else if (isAppt)
             {

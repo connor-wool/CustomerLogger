@@ -53,10 +53,29 @@ namespace CustomerLogger
 
         private void InitializeQuickPickList()
         {
+            //general information
             QuickCodes.Add("GI");
+            QuickCodes.Add("gi");
+            QuickCodes.Add("Gi");
+            QuickCodes.Add("gI");
+
+            //writing center
             QuickCodes.Add("WC");
+            QuickCodes.Add("wc");
+            QuickCodes.Add("wC");
+            QuickCodes.Add("Wc");
+
+            //referral
             QuickCodes.Add("RF");
+            QuickCodes.Add("rf");
+            QuickCodes.Add("Rf");
+            QuickCodes.Add("rF");
+
+            //coretech
             QuickCodes.Add("CT");
+            QuickCodes.Add("ct");
+            QuickCodes.Add("cT");
+            QuickCodes.Add("Ct");
         }
 
         //when clicked we move on to the next page
